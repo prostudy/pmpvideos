@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<script src="lib/angular.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags 
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">-->
+    
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1522988117993830',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+	</script>
+	<!-- share -->
+	<meta property="fb:app_id" content="1522988117993830"/> 
+	<meta property="og:url" content="http://mytime.getsir.mx/cost.html"/>
+	<meta property="og:type" content="article" />
+	<meta property="og:description" content="A tool that allows know how to estimate time for tasks using Project Evaluation and Review Techniques." />
+	<meta property="og:site_name" content="My PERT" />
+	<meta property="og:title" content="My PERT: How to estimate the cost of your projects?"/>
+	<meta property="og:image" content="http://mytime.getsir.mx/images/money.jpg" />
+	
+	<!-- Twitter Summary Card -->
+	<meta name="twitter:card" content="summary_large_image"/>
+	<meta name="twitter:site" content="@getsir">
+	<meta name="twitter:creator" content="@getsir"/>
+	<meta name="twitter:url" content="http://mytime.getsir.mx/cost.html"/>
+	<meta name="twitter:title" content="My PERT: How to estimate the cost of your projects??"/>
+	<meta name="twitter:description" content="A tool that allows know how to estimate time for tasks using Project Evaluation and Review Techniques."/>
+	<meta name="twitter:image" content="http://mytime.getsir.mx/images/money.jpg"/>
+	
+    <title>Cost-Any-Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body role="document" ng-app="pmpvideos" ng-controller="PMPVideosCtrl" >
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68054907-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Estimated cost of a project.</a>
+        </div>
+        
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main" >
+
+      <header>
+      <h1>Juke<strong>Tube</strong></h1>
+      <form id="search" data-ng-submit="search()">
+        <input id="query" name="q" type="text" placeholder="Search for a YouTube video" data-ng-model="query">
+        <input id="submit" type="image" src="search.png" alt="Search">
+      </form>
+      <nav>
+        <a id="play">{{ youtube.state }}</a>
+        <a id="pause">Pause</a>
+      </nav>
+    </header>
+    <div id="results">
+      <div class="video" data-ng-repeat="video in results" data-ng-click="queue(video.id, video.title)">
+        <img class="video-image" data-ng-src="{{ video.thumbnail }}">
+        <p class="video-title">{{ video.title }}</p>
+        <p class="video-author">{{ video.author }}</p>
+        <p class="video-description">{{ video.description }}</p>
+      </div>
+    </div>
+    <div id="player">
+      <div id="placeholder"></div>
+    </div>
+    <div id="playlist">
+      <p id="current">{{ youtube.videoTitle }}</p>
+      <ol id="upcoming" data-ng-show="playlist">
+        <li data-ng-repeat="video in upcoming">
+          <p class="item-delete" data-ng-click="delete('upcoming', video.id)">delete</p>
+          <p class="item-title" data-ng-click="launch(video.id, video.title)">{{video.title}}</p>
+        </li>
+      </ol>
+      <ol id="history" data-ng-hide="playlist">
+        <li data-ng-repeat="video in history">
+          <p class="item-delete" data-ng-click="delete('history', video.id)">delete</p>
+          <p class="item-title" data-ng-click="queue(video.id, video.title)">{{video.title}}</p>
+        </li>
+      </ol>
+      <p id="tabs">
+        <a ng-class="{on:playlist}" data-ng-click="tabulate(true)">Upcoming</a>
+        <a ng-class="{on:!playlist}" data-ng-click="tabulate(false)">History</a>
+      </p>
+    </div>
+    <footer>
+      <em>Concept &amp; Design: <a href="http://jgthms.com">J. Thomas</a></em>
+      Built with <a href="http://angularjs.org/">AngularJS</a>. Source code available on <a href="https://github.com/jgthms/juketube">GitHub</a>.
+    </footer>
+
+	</div> <!-- /container -->
+
+
+ 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/pmpvideos.js"></script>
+    <script src="js/PMPVideosCtrl.js"></script>
+    
+    <script src="js/bootstrap.min.js"></script>
+    
+
+
+</body>
+</html>
+
+

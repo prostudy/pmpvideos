@@ -1,0 +1,43 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
+.alert.showAlert {
+    display: block;
+}
+
+.alert.notShowAlert {
+    display: none;
+}
+
+select {
+    margin: 0px;
+    border: 1px solid #111;
+    background: transparent;
+    width: 65%;
+    padding: 2px;
+    /* font-size: 16px; */
+    border: 1px solid #ccc;
+    height: 24px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+
